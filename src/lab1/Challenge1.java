@@ -23,17 +23,31 @@ public class Challenge1 {
         Challenge1 app = new Challenge1();
         
         String fullName = JOptionPane.showInputDialog("Enter full name (use Format: first last):");
-        String lastName = app.extractLastName(fullName);
-        String msg = "Your last name is: " + lastName;
-        JOptionPane.showMessageDialog(null, msg);
+        
+        String lastName = null;
+        try{
+         lastName = app.extractLastName(fullName);
+        }catch(IllegalArgumentException iae){
+            JOptionPane.showMessageDialog(null, iae.getMessage(),"Error!", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        if(lastName != null) {
+            String msg = "Your last name is: " + lastName;
+            JOptionPane.showMessageDialog(null, msg);
+        }
+
     }
     
     // write the code to extract the lastName from the fullName
     // Use exception handling to prevent a crash in the event that fullName
     // is null or empty. Throw the exception to the calling method. and handle
     // it there.
-    public String extractLastName(String fullName) {
-        String lastName = null;
+    public String extractLastName(String fullName) throws IllegalArgumentException{
+        if(fullName == null || !fullName.matches("[a-zA-Z]+ [a-zA-Z]+")){
+            throw new IllegalArgumentException("Full name must be two words seperacted by a space charcater!");
+        }
+        
+        String lastName = fullName.split(" ")[LAST_NAME_IDX];
         
         // Your code goes here.
         
