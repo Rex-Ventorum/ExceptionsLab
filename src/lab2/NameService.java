@@ -18,11 +18,14 @@ public class NameService {
      * @throws IllegalArgumentException if fullName is null or empty or has 
      * fewer than two parts
      */
-    public String extractLastName(String fullName) {
+    public String extractLastName(String fullName) throws IllegalArgumentException{
         String lastName = null;
         
-        // write your code here to extract the lastName and store in the
-        // above local variable
+        if(fullName == null || !fullName.matches("[a-zA-Z]+ [a-zA-Z]+")){
+            throw new IllegalArgumentException("Full name must be two words seperacted by a space charcater!");
+        }
+        
+        lastName = fullName.split(" ")[1];
         
         return lastName;
     }
