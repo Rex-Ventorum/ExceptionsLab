@@ -18,10 +18,32 @@ public class NameService {
      * @throws YourCustomExceptionName if fullName is null or empty or has
      * fewer than two parts
      */
-    public String extractLastName(String fullName) {
+    private int maxNameLength;
+
+    public NameService(){
+        maxNameLength = 15;
+    }
+    
+    public int getMaxNameLength() {
+        return maxNameLength;
+    }
+
+    public void setMaxNameLength(int maxNameLength) {
+        if(maxNameLength < 0) throw new IllegalArgumentException("You may not have a negtive Max Length");
+        this.maxNameLength = maxNameLength;
+    }
+    
+    public String extractLastName(String fullName) throws IllegalArgumentException,MaximumLengthException{
         String lastName = null;
         
-        // put your code here
+        if(fullName == null || !fullName.matches("[a-zA-Z0-9]+ [a-zA-Z0-9]+")){
+            throw new IllegalArgumentException("Full name must be two words seperacted by a space charcater!");
+        }
+               
+        lastName = fullName.split(" ")[1];
+        if(lastName.length() > maxNameLength){
+            throw new MaximumLengthException();
+        }
         
         return lastName;
     }
