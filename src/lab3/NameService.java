@@ -42,7 +42,7 @@ public class NameService {
                
         lastName = fullName.split(" ")[1];
         if(lastName.length() > maxNameLength){
-            throw new MaximumLengthException();
+            throw new MaximumLengthException("This String Will Be Ignored!");
         }
         
         return lastName;
