@@ -32,6 +32,10 @@ public class Employee {
         daysVacation = 0;
     }
 
+    public boolean isFirstNameEvenLength(){
+        return firstName.length() % 2 == 0;
+    }
+    
     /**
      * Convenience constructor to set all properties.
      * @param firstName - cannot be null or empty
@@ -63,7 +67,7 @@ public class Employee {
     }
 
     /**
-     * Mutates the first name.
+     * Mutates the first name and validates entries. 
      * @param firstName - cannot be null or empty
      * @throws IllegalArgumentException if firstName is null or empty
      */
@@ -100,6 +104,7 @@ public class Employee {
         this.ssn = ssn;
     }
 
+    @Override
     public String toString() {
         return firstName + " " + lastName;
     }
